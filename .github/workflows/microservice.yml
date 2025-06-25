@@ -13,11 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -34,4 +29,10 @@ jobs:
           custom-arguments: '-q'
           click-to-expand: true
           report-title: 'Test Report'
+
+      - name: Build Docker image
+        run: docker build -t flask-microservice .
+
+      #- name: Run tests inside container
+      #  run: docker run --rm flask-microservice
 
